@@ -1,0 +1,41 @@
+.modal__content_type_image {
+  width: 498px;
+  height: 610px;
+  position: relative;
+}
+
+.modal__weather {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+  padding-top: 12px;
+}
+
+.modal__caption {
+  font-size: 20px;
+  margin: 0;
+}
+
+.modal__image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal__footer {
+  top: 518px;
+  left: 32px;
+  position: absolute;
+}
+
+.modal__close_type_image {
+  position: absolute;
+  z-index: 1;
+  background-image: url(../../assets/close-button-type-image.png);
+  border: none;
+  background-color: transparent;
+}
