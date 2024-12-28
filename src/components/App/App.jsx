@@ -77,8 +77,7 @@ function App() {
             ></Route>
             <Route
               path="/profile"
-              element={<Profile />}
-              handleCardClick={handleCardClick}
+              element={<Profile handleCardClick={handleCardClick} />}
             ></Route>
           </Routes>
           <Footer />

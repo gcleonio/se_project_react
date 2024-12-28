@@ -40,3 +40,8 @@
   height: 25px;
   width: 157px;
 }
+
+.header__link {
+  text-decoration: none;
+  color: black;
+}
