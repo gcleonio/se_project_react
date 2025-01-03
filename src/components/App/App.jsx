@@ -12,6 +12,8 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../../AddItemModal/AddItemModal";
+import { getItems, addItem, deleteCard } from "../../utils/api";
+import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -22,6 +24,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -36,15 +39,36 @@ function App() {
     setActiveModal("");
   };
 
-  const onAddItem = (values) => {
-    // console.log(e.target);
-    // console.log(e);
-    console.log(values);
+  const onAddItem = ({ name, imageUrl, weather }) => {
+    addItem({ name, imageUrl, weather })
+      .then((res) => {
+        setClothingItems((prevItems) => {
+          return [res, ...prevItems];
+        });
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
+  };
+
+  const handleDeleteCard = (_id) => {
+    deleteCard(selectedCard._id)
+      .then((data) => {
+        setClothingItems(
+          clothingItems.filter((item) => item._id !== selectedCard._id)
+        );
+        setSelectedCard({});
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleOpenDelete = () => {
+    setActiveModal("confirm");
   };
 
   useEffect(() => {
@@ -57,6 +81,18 @@ function App() {
   }, []);
   // console.log(currentTemperatureUnit);
   console.log(weatherData);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        // set the clothing items
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  }, []);
+
+  // Add functionality for deleting items (DELETE request), see figma
 
   return (
     <div className="page">
@@ -72,12 +108,19 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  // pass clothingItems as a prop
+                  clothingItems={clothingItems}
                 />
               }
             ></Route>
             <Route
               path="/profile"
-              element={<Profile handleCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
             ></Route>
           </Routes>
           <Footer />
@@ -91,6 +134,14 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          // handleDeleteCard={handleDeleteCard}
+          onOpenDelete={handleOpenDelete}
+        />
+        <ModalWithConfirm
+          activeModal={activeModal}
+          onClose={closeActiveModal}
+          handleDeleteCard={handleDeleteCard}
+          buttonText={"Yes, delete item"}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>

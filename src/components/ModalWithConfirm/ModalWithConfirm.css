@@ -1,0 +1,50 @@
+.modal__close_type_confirm-delete {
+  position: absolute;
+  z-index: 1;
+  background-image: url(../../assets/close-button-type-confirm-delete.svg);
+  border: none;
+  background-color: transparent;
+  height: 16px;
+  width: 16px;
+}
+
+.modal__delete-confirm-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #ff4d00;
+  margin-top: 40px;
+}
+
+.modal__cancel-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  margin-top: 24px;
+}
+
+.modal__footer-confirm {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__content-type-confirm {
+  width: 670px;
+  height: 280px;
+  justify-items: center;
+}
+
+.modal__caption-confirm {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 0;
+  width: 367px;
+  height: 48px;
+  text-align: center;
+  margin-top: 32px;
+}

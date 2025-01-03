@@ -32,10 +32,30 @@
   position: absolute;
 }
 
+.modal__captions {
+  /* top: 518px;
+  left: 32px;
+  position: absolute; */
+}
+
 .modal__close_type_image {
   position: absolute;
   z-index: 1;
   background-image: url(../../assets/close-button-type-image.png);
   border: none;
   background-color: transparent;
+}
+
+.modal__item-delete-btn {
+  position: relative;
+  top: -56px;
+  left: 333px;
+  border: none;
+  background: none;
+  color: #ff4d00;
+  padding: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  cursor: pointer;
 }

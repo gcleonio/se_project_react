@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "_id": 0,
-      "name": "Beanie",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
-    },
-    {
       "_id": 1,
       "name": "Boot",
       "weather": "cold",
@@ -101,6 +95,24 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "Thermal",
+      "imageUrl": "https://www.511tactical.com/media/catalog/product/72234_344_JASPER_THERMAL_LS_01.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=855&width=855",
+      "weather": "",
+      "_id": 17
+    },
+    {
+      "name": "Thermal",
+      "imageUrl": "https://www.511tactical.com/media/catalog/product/72234_344_JASPER_THERMAL_LS_01.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=855&width=855",
+      "weather": "",
+      "_id": 18
+    },
+    {
+      "name": "Fur boots",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSRxWMxh4VQUbi6r2s7q2kVnq6VaBL3qdRN2_Gz1OA7xMkzBvcpfNhKVSBojljTWOBx57GftCyIQNxmx9_zzf8QwUVV2jXI3H0TbNS-YL_c3OnG3bPy1lOXOrc",
+      "weather": "cold",
+      "_id": 19
     }
   ]
 }
