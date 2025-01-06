@@ -35,6 +35,24 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  useEffect(() => {
+    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+
+    const handleEscClose = (e) => {
+      // define the function inside useEffect not to lose the reference on rerendering
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      //clean up function for removing the listener if the component unmounts
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]); // dependencies array in order to watch activeModal
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -92,8 +110,6 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Add functionality for deleting items (DELETE request), see figma
-
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
@@ -119,6 +135,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
                 />
               }
             ></Route>

@@ -22,6 +22,7 @@
   border: none;
   background-color: transparent;
   margin: 20px 0px;
+  cursor: pointer;
 }
 
 .clothes-section__items {
