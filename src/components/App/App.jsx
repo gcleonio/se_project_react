@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -15,6 +15,10 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteCard } from "../../utils/api";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
+import { registerUser, loginUser, verifyToken } from "../../utils/auth";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -26,6 +30,10 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -90,6 +98,34 @@ function App() {
     setActiveModal("confirm");
   };
 
+  const handleLogin = (values) => {
+    if (!values) {
+      return;
+    }
+    loginUser(values)
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+        return verifyToken(data.token);
+      })
+      .then((currentUser) => {
+        setCurrentUser(currentUser);
+        setIsLoggedIn(true);
+        closeActiveModal();
+        navigate("/profile");
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleRegistration = (values) => {
+    registerUser(values)
+      .then((res) => {
+        console.log(res);
+        closeActiveModal();
+        handleLogin({ email: values.email, password: values.password });
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -109,6 +145,20 @@ function App() {
         setClothingItems(data);
       })
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      verifyToken(token)
+        .then((user) => {
+          setCurrentUser(user);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, []);
 
   return (
@@ -133,11 +183,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             ></Route>
           </Routes>
@@ -161,7 +213,11 @@ function App() {
           handleDeleteCard={handleDeleteCard}
           buttonText={"Yes, delete item"}
         />
-        <RegisterModal isOpen={true} />
+        <RegisterModal
+          onClose={closeActiveModal}
+          handleRegistration={handleRegistration}
+        />
+        <LoginModal onClose={closeActiveModal} handleLogin={handleLogin} />
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
