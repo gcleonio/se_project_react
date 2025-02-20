@@ -14,6 +14,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteCard } from "../../utils/api";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -160,6 +161,7 @@ function App() {
           handleDeleteCard={handleDeleteCard}
           buttonText={"Yes, delete item"}
         />
+        <RegisterModal />
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
