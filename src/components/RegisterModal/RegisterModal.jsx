@@ -22,14 +22,8 @@ const RegisterModal = ({
 
   // use a useEffect hook to reset the input field state to empty strings when the modal is opened
 
-
   return (
-    <ModalWithForm
-      title="Sign Up"
-      onClose={onClose}
-      isOpen={isOpen}
-      onSubmit={}
-    >
+    <ModalWithForm title="Sign Up" onClose={onClose} isOpen={isOpen}>
       <label htmlFor="email" className="modal__label">
         Email *
         <input
@@ -41,7 +35,6 @@ const RegisterModal = ({
           minLength="1"
           maxLength="30"
           value={email}
-          onChange={}
           required
         />
       </label>
@@ -56,7 +49,6 @@ const RegisterModal = ({
           minLength="1"
           maxLength="30"
           value={password}
-          onChange={}
           required
         />
       </label>
@@ -84,19 +76,18 @@ const RegisterModal = ({
           placeholder="Avatar URL"
           name="avatar"
           value={avatar}
-          onChange={}
           required
         />
       </label>
       <div className="modal__button-div">
-        <button type="button" className="modal__button-sign-up" onClick={}>Sign Up</button>
-
+        <button type="button" className="modal__button-sign-up">
+          Sign Up
+        </button>
         or
-
-        <button type="button" className="modal__button-log-in" onClick={}>Log In</button>
+        <button type="button" className="modal__button-log-in">
+          Log In
+        </button>
       </div>
-
-
     </ModalWithForm>
   );
 };

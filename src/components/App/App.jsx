@@ -161,7 +161,7 @@ function App() {
           handleDeleteCard={handleDeleteCard}
           buttonText={"Yes, delete item"}
         />
-        <RegisterModal />
+        <RegisterModal isOpen={true} />
       </CurrentTemperatureUnitContext.Provider>
     </div>
   );
