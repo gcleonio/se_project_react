@@ -67,6 +67,18 @@ function App() {
     setActiveModal("");
   };
 
+  const handleRegisterModal = () => {
+    setActiveModal("signup");
+  };
+
+  const handleLoginModal = () => {
+    setActiveModal("login");
+  };
+
+  const toggleModal = () => {
+    setActiveModal((prev) => (prev === "signup" ? "login" : "signup"));
+  };
+
   const onAddItem = ({ name, imageUrl, weather }) => {
     addItem({ name, imageUrl, weather })
       .then((res) => {
@@ -169,7 +181,12 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              onSignUpClick={handleRegisterModal}
+              onLoginClick={handleLoginModal}
+            />
             <Routes>
               <Route
                 path="/"
@@ -218,8 +235,15 @@ function App() {
           <RegisterModal
             onClose={closeActiveModal}
             handleRegistration={handleRegistration}
+            isOpen={activeModal === "signup"}
+            onLoginClick={toggleModal}
           />
-          <LoginModal onClose={closeActiveModal} handleLogin={handleLogin} />
+          <LoginModal
+            onClose={closeActiveModal}
+            handleLogin={handleLogin}
+            isOpen={activeModal === "login"}
+            onSignUpClick={toggleModal}
+          />
         </CurrentTemperatureUnitContext.Provider>
       </div>
     </CurrentUserContext.Provider>
