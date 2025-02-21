@@ -186,6 +186,7 @@ function App() {
               weatherData={weatherData}
               onSignUpClick={handleRegisterModal}
               onLoginClick={handleLoginModal}
+              isLoggedIn={isLoggedIn}
             />
             <Routes>
               <Route
@@ -225,6 +226,7 @@ function App() {
             onClose={closeActiveModal}
             // handleDeleteCard={handleDeleteCard}
             onOpenDelete={handleOpenDelete}
+            isLoggedIn={isLoggedIn}
           />
           <ModalWithConfirm
             activeModal={activeModal}

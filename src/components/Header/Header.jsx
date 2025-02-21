@@ -7,7 +7,13 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ handleAddClick, weatherData, onSignUpClick, onLoginClick }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  onSignUpClick,
+  onLoginClick,
+  isLoggedIn,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -24,7 +30,7 @@ function Header({ handleAddClick, weatherData, onSignUpClick, onLoginClick }) {
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      {currentUser ? (
+      {isLoggedIn ? (
         <>
           <button
             onClick={handleAddClick}
