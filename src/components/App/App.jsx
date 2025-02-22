@@ -13,11 +13,12 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems, addItem, deleteCard } from "../../utils/api";
+import { getItems, addItem, deleteCard, editUser } from "../../utils/api";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import { registerUser, loginUser, verifyToken } from "../../utils/auth";
 
@@ -79,6 +80,16 @@ function App() {
     setActiveModal((prev) => (prev === "signup" ? "login" : "signup"));
   };
 
+  const handleEditModal = () => {
+    setActiveModal("edit");
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentUser(currentUser === null);
+    localStorage.clear();
+  };
+
   const onAddItem = ({ name, imageUrl, weather }) => {
     addItem({ name, imageUrl, weather })
       .then((res) => {
@@ -135,6 +146,16 @@ function App() {
         console.log(res);
         closeActiveModal();
         handleLogin({ email: values.email, password: values.password });
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleEdit = ({ name, imageUrl }) => {
+    const token = localStorage.getItem("jwt");
+    editUser(name, imageUrl, token)
+      .then((res) => {
+        setCurrentUser(res);
+        closeActiveModal();
       })
       .catch((err) => console.error(err));
   };
@@ -208,6 +229,8 @@ function App() {
                       handleCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      onLogoutClick={handleLogout}
+                      onEditClick={handleEditModal}
                     />
                   </ProtectedRoute>
                 }
@@ -245,6 +268,11 @@ function App() {
             handleLogin={handleLogin}
             isOpen={activeModal === "login"}
             onSignUpClick={toggleModal}
+          />
+          <EditProfileModal
+            isOpen={activeModal === "edit"}
+            onClose={closeActiveModal}
+            handleEdit={handleEdit}
           />
         </CurrentTemperatureUnitContext.Provider>
       </div>

@@ -80,11 +80,19 @@ const RegisterModal = ({
         />
       </label>
       <div className="modal__button-div">
-        <button type="button" className="modal__button-sign-up">
+        <button
+          type="button"
+          className="modal__button-sign-up"
+          onClick={handleRegistration}
+        >
           Sign Up
         </button>
         or
-        <button type="button" className="modal__button-log-in">
+        <button
+          type="button"
+          className="modal__button-log-in"
+          onClick={onLoginClick}
+        >
           Log In
         </button>
       </div>

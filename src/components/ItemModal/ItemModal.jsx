@@ -1,6 +1,6 @@
 import "./ItemModal.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 function ItemModal({
   activeModal,

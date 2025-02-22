@@ -41,11 +41,19 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         />
       </label>
       <div className="modal__button-div">
-        <button type="submit" className="modal__button-login">
+        <button
+          type="submit"
+          className="modal__button-login"
+          onClick={handleLogin}
+        >
           Log In
         </button>
         or
-        <button type="button" className="modal__button-signup">
+        <button
+          type="button"
+          className="modal__button-signup"
+          onClick={onSignUpClick}
+        >
           Sign Up
         </button>
       </div>
