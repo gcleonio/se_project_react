@@ -13,7 +13,14 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems, addItem, deleteCard, editUser } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteCard,
+  editUser,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
@@ -36,6 +43,28 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   const navigate = useNavigate();
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.error(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.error(err));
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -218,6 +247,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     // pass clothingItems as a prop
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               ></Route>
@@ -231,6 +261,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       onLogoutClick={handleLogout}
                       onEditClick={handleEditModal}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }

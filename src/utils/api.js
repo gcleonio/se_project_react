@@ -39,4 +39,32 @@ function editUser(name, imageUrl, token) {
   });
 }
 
-export { checkRes, getItems, addItem, deleteCard, editUser };
+function addCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function removeCardLike(id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export {
+  checkRes,
+  getItems,
+  addItem,
+  deleteCard,
+  editUser,
+  addCardLike,
+  removeCardLike,
+};

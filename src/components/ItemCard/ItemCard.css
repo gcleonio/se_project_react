@@ -24,3 +24,14 @@
   width: 100%;
   border-radius: 19px;
 }
+
+.card__like {
+  width: 18px;
+  height: 15px;
+  border: none;
+  background-image: url(../../assets/likebuttondefault.png);
+}
+
+.card__like_active {
+  background-image: url(../../assets/likedbuttonactive.svg);
+}
