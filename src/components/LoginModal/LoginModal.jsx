@@ -3,15 +3,38 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "..//ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
-  const [email, setEmai] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // also need handlePasswordChange, handleEmailChange
+  const handlePasswordChange = (e) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
 
-  // use a useEffect hook to reset the input field state to empty strings when the modal is opened
+  const handleEmailChange = (e) => {
+    console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    handleLogin({ email, password });
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setEmail("");
+      setPassword("");
+    }
+  }, [isOpen]);
 
   return (
-    <ModalWithForm title="Log In" onClose={onClose} isOpen={isOpen}>
+    <ModalWithForm
+      title="Log In"
+      onClose={onClose}
+      isOpen={isOpen}
+      onSubmit={handleLoginSubmit}
+    >
       <label htmlFor="login" className="modal__label">
         Email
         <input
@@ -24,6 +47,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
           maxLength="30"
           value={email}
           required
+          onChange={handleEmailChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -38,14 +62,11 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
           maxLength="30"
           value={password}
           required
+          onChange={handlePasswordChange}
         />
       </label>
       <div className="modal__button-div">
-        <button
-          type="submit"
-          className="modal__button-login"
-          onClick={handleLogin}
-        >
+        <button type="submit" className="modal__button-login">
           Log In
         </button>
         or
