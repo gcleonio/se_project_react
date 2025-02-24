@@ -297,7 +297,7 @@ function App() {
           <LoginModal
             onClose={closeActiveModal}
             handleLogin={handleLogin}
-            isOpen={true}
+            isOpen={activeModal === "login"}
             onSignUpClick={toggleModal}
           />
           <EditProfileModal
