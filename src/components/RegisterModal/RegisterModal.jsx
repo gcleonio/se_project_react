@@ -9,7 +9,7 @@ const RegisterModal = ({
   onClose,
 }) => {
   const [name, setName] = useState("");
-  const [email, setEmai] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -18,12 +18,42 @@ const RegisterModal = ({
     setName(e.target.value);
   };
 
-  // also need handlePasswordChange, handleEmailChange, handleAvatarChange, handleRegistrationSubmit
+  const handlePasswordChange = (e) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
 
-  // use a useEffect hook to reset the input field state to empty strings when the modal is opened
+  const handleEmailChange = (e) => {
+    console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const handleAvatarChange = (e) => {
+    console.log(e.target.value);
+    setAvatar(e.target.value);
+  };
+
+  const handleRegistrationSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration({ name, email, password, avatar });
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setAvatar("");
+      setEmail("");
+      setPassword("");
+    }
+  }, [isOpen]);
 
   return (
-    <ModalWithForm title="Sign Up" onClose={onClose} isOpen={isOpen}>
+    <ModalWithForm
+      title="Sign Up"
+      onSubmit={handleRegistrationSubmit}
+      onClose={onClose}
+      isOpen={isOpen}
+    >
       <label htmlFor="email" className="modal__label">
         Email *
         <input
@@ -36,6 +66,7 @@ const RegisterModal = ({
           maxLength="30"
           value={email}
           required
+          onChange={handleEmailChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -50,6 +81,7 @@ const RegisterModal = ({
           maxLength="30"
           value={password}
           required
+          onChange={handlePasswordChange}
         />
       </label>
       <label htmlFor="name" className="modal__label">
@@ -77,6 +109,7 @@ const RegisterModal = ({
           name="avatar"
           value={avatar}
           required
+          onChange={handleAvatarChange}
         />
       </label>
       <div className="modal__button-div">
