@@ -40,7 +40,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         <input
           type="email"
           className="modal__input"
-          id="email"
+          id="email-login"
           placeholder="Email"
           name="email"
           minLength="1"
@@ -55,7 +55,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         <input
           type="password"
           className="modal__input"
-          id="password"
+          id="password-login"
           placeholder="Password"
           name="password"
           minLength="1"

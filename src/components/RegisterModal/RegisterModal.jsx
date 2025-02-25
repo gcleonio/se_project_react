@@ -53,13 +53,14 @@ const RegisterModal = ({
       onSubmit={handleRegistrationSubmit}
       onClose={onClose}
       isOpen={isOpen}
+      buttonText="Sign Up"
     >
       <label htmlFor="email" className="modal__label">
         Email *
         <input
           type="email"
           className="modal__input"
-          id="email"
+          id="email-register"
           placeholder="Email"
           name="email"
           minLength="1"
@@ -74,7 +75,7 @@ const RegisterModal = ({
         <input
           type="password"
           className="modal__input"
-          id="password"
+          id="password-register"
           placeholder="Password"
           name="password"
           minLength="1"
@@ -89,7 +90,7 @@ const RegisterModal = ({
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="name-register"
           placeholder="Name"
           name="name"
           required
@@ -104,7 +105,7 @@ const RegisterModal = ({
         <input
           type="url"
           className="modal__input"
-          id="avatar"
+          id="avatar-register"
           placeholder="Avatar URL"
           name="avatar"
           value={avatar}

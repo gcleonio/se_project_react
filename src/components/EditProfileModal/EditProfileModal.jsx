@@ -45,7 +45,7 @@ const EditProfileModal = ({ isOpen, onClose, handleEdit }) => {
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="name-editprofile"
           placeholder="Name"
           name="name"
           minLength="1"
@@ -60,7 +60,7 @@ const EditProfileModal = ({ isOpen, onClose, handleEdit }) => {
         <input
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="imageUrl-editprofile"
           placeholder="Avatar URL"
           name="link"
           value={imageUrl}
