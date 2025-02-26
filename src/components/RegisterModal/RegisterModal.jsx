@@ -53,7 +53,6 @@ const RegisterModal = ({
       onSubmit={handleRegistrationSubmit}
       onClose={onClose}
       isOpen={isOpen}
-      buttonText="Sign Up"
     >
       <label htmlFor="email" className="modal__label">
         Email *
