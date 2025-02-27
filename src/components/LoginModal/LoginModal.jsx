@@ -69,7 +69,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         <button type="submit" className="modal__button-login">
           Log In
         </button>
-        or
+        <span className="modal__or-text">or</span>
         <button
           type="button"
           className="modal__button-signup"

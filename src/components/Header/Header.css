@@ -46,3 +46,10 @@
   text-decoration: none;
   color: black;
 }
+
+.modal__button {
+  background: none;
+  border: none;
+  font-weight: 700;
+  padding-left: 20px;
+}

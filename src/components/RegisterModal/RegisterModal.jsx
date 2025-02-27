@@ -120,7 +120,7 @@ const RegisterModal = ({
         >
           Sign Up
         </button>
-        or
+        <span className="modal__or-text">or</span>
         <button
           type="button"
           className="modal__button-log-in"
