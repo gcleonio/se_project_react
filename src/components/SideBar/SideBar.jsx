@@ -3,7 +3,7 @@ import { useContext } from "react";
 import "./SideBar.css";
 import avatar from "../../assets/avatar.svg";
 
-function SideBar(onLogoutClick, onEditClick) {
+function SideBar({ onLogoutClick, onEditClick }) {
   const { currentUser } = useContext(CurrentUserContext);
 
   return (
