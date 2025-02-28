@@ -120,7 +120,8 @@ function App() {
   };
 
   const onAddItem = ({ name, imageUrl, weather }) => {
-    addItem({ name, imageUrl, weather })
+    const token = localStorage.getItem("jwt");
+    addItem({ name, imageUrl, weather, token })
       .then((res) => {
         setClothingItems((prevItems) => {
           return [res, ...prevItems];
