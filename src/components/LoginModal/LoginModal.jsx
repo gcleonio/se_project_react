@@ -33,7 +33,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
       title="Log In"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleLoginSubmit}
+      // onSubmit={handleLoginSubmit}
     >
       <label htmlFor="login" className="modal__label">
         Email
@@ -66,7 +66,11 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         />
       </label>
       <div className="modal__button-div">
-        <button type="submit" className="modal__button-login">
+        <button
+          type="submit"
+          className="modal__button-login"
+          onClick={handleLoginSubmit}
+        >
           Log In
         </button>
         <span className="modal__or-text">or</span>

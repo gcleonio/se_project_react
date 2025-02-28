@@ -1,3 +1,4 @@
+import { checkRes } from "./api";
 const baseUrl = "http://localhost:3001";
 
 //  signup for user registration
@@ -13,7 +14,7 @@ const registerUser = (userData) => {
       email: userData.email,
       password: userData.password,
     }),
-  });
+  }).then(checkRes);
 };
 
 // signin for user authorization
@@ -29,7 +30,7 @@ const loginUser = (userData) => {
       email: userData.email,
       password: userData.password,
     }),
-  });
+  }).then(checkRes);
 };
 
 const verifyToken = (token) => {
@@ -39,7 +40,7 @@ const verifyToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then(checkRes);
 };
 
 export { registerUser, loginUser, verifyToken };
