@@ -44,26 +44,30 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = (item) => {
     const token = localStorage.getItem("jwt");
+    const isLiked = item.likes.some((id) => id === currentUser._id); // Check if the user's id is in the card's likes array
+
     // Check if this card is not currently liked
-    !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.error(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-        removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.error(err));
+    if (!isLiked) {
+      // if so, send a request to add the user's id to the card's likes array
+      addCardLike(item._id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((card) => (card._id === item._id ? updatedCard : card))
+          );
+        })
+        .catch((err) => console.error(err));
+    } else {
+      // if not, send a request to remove the user's id from the card's likes array
+      removeCardLike(item._id, token)
+        .then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((card) => (card._id === item._id ? updatedCard : card))
+          );
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const handleCardClick = (card) => {

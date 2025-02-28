@@ -24,8 +24,8 @@
   left: 0;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  height: calc(100% - 112px);
+  object-fit: cover;
 }
 
 .modal__footer {
@@ -42,7 +42,7 @@
 
 .modal__close_type_image {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   background-image: url(../../assets/close-button-type-image.png);
   border: none;
   background-color: transparent;

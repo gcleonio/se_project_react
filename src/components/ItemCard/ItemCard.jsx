@@ -16,6 +16,7 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     : "card__like";
 
   const handleLike = () => {
+    console.log("Like button clicked");
     onCardLike(item);
   };
 
