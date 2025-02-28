@@ -19,7 +19,7 @@ function Header({
     day: "numeric",
   });
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -41,9 +41,11 @@ function Header({
           </button>
           <Link to="/profile" className="header__link">
             <div className="header__user-container">
-              <p className="header__username">{currentUser.name}</p>
+              <p className="header__username">
+                {currentUser?.name || "User name"}
+              </p>
               <img
-                src={currentUser.avatar}
+                src={currentUser?.avatar || avatar}
                 alt="avatar"
                 className="header__avatar"
               />

@@ -19,12 +19,13 @@ const registerUser = (userData) => {
 
 // signin for user authorization
 const loginUser = (userData) => {
-  const token = localStorage.getItem("jwt");
+  // const token = localStorage.getItem("jwt");
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      // removed authorization header because user not yet authenticated at this point. Use authorization header for requests that require authentication, like verifying a token or accessing protected resources
+      // Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       email: userData.email,

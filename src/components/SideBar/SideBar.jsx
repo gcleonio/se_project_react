@@ -9,11 +9,11 @@ function SideBar({ onLogoutClick, onEditClick }) {
   return (
     <div className="sidebar">
       <img
-        src={currentUser.avatar || avatar}
+        src={currentUser?.avatar || avatar}
         alt="Default Avatar"
         className="sidebar__avatar"
       />
-      <p className="sidebar__username">{currentUser.name || "User name"}</p>
+      <p className="sidebar__username">{currentUser?.name || "User name"}</p>
       <div className="sidebar__log">
         <button className="sidebar__change" type="button" onClick={onEditClick}>
           Change profile data
