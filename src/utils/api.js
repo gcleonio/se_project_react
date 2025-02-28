@@ -36,7 +36,7 @@ function editUser(name, imageUrl, token) {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar: imageUrl }),
-  });
+  }).then(checkRes);
 }
 
 function addCardLike(id, token) {
@@ -46,7 +46,7 @@ function addCardLike(id, token) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then(checkRes);
 }
 
 function removeCardLike(id, token) {
@@ -56,7 +56,7 @@ function removeCardLike(id, token) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then(checkRes);
 }
 
 export {

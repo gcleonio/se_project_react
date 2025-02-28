@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 const EditProfileModal = ({ isOpen, onClose, handleEdit }) => {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const handleNameChange = (e) => {
     console.log(e.target.value);
@@ -19,18 +19,22 @@ const EditProfileModal = ({ isOpen, onClose, handleEdit }) => {
   };
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && currentUser) {
       //   setName("");
       //   setImageUrl("");
-      setName(currentUser.name);
-      setImageUrl(currentUser.avatar);
+      setName(currentUser.name || "");
+      setImageUrl(currentUser.avatar || "");
     }
-  }, [isOpen]);
+  }, [isOpen, currentUser]);
 
   const handleEditProfileSubmit = (e) => {
     e.preventDefault();
     handleEdit({ name, imageUrl });
   };
+
+  if (!currentUser) {
+    return null;
+  }
 
   return (
     <ModalWithForm
@@ -68,9 +72,6 @@ const EditProfileModal = ({ isOpen, onClose, handleEdit }) => {
           required
         />
       </label>
-      <button type="submit" className="modal__save-changes-button">
-        Save Changes
-      </button>
     </ModalWithForm>
   );
 };

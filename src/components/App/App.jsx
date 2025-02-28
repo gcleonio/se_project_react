@@ -183,8 +183,8 @@ function App() {
   const handleEdit = ({ name, imageUrl }) => {
     const token = localStorage.getItem("jwt");
     editUser(name, imageUrl, token)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
         closeActiveModal();
       })
       .catch((err) => console.error(err));
