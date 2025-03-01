@@ -140,16 +140,17 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const handleDeleteCard = (_id) => {
-    deleteCard(selectedCard._id)
-      .then((data) => {
+  const handleDeleteCard = () => {
+    const token = localStorage.getItem("jwt");
+    deleteCard(selectedCard._id, token)
+      .then(() => {
         setClothingItems(
           clothingItems.filter((item) => item._id !== selectedCard._id)
         );
         setSelectedCard({});
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => console.error(err));
   };
 
   const handleOpenDelete = () => {
@@ -283,7 +284,6 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
-            // handleDeleteCard={handleDeleteCard}
             onOpenDelete={handleOpenDelete}
             isLoggedIn={isLoggedIn}
           />
