@@ -189,7 +189,8 @@ function App() {
     const token = localStorage.getItem("jwt");
     editUser(name, imageUrl, token)
       .then((updatedUser) => {
-        setCurrentUser(updatedUser);
+        console.log("API response:", updatedUser);
+        setCurrentUser(updatedUser.data);
         closeActiveModal();
       })
       .catch((err) => console.error(err));
