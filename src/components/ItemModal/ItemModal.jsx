@@ -2,28 +2,17 @@ import "./ItemModal.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
-function ItemModal({
-  activeModal,
-  onClose,
-  card,
-  // handleDeleteCard,
-  onOpenDelete,
-  isLoggedIn,
-}) {
+function ItemModal({ activeModal, onClose, card, onOpenDelete, isLoggedIn }) {
   console.log(card);
 
-  // const deleteCardClick = () => {
-  //   handleDeleteCard(card._id);
-  // };
-
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser?._id;
 
   // Debugging statements
   console.log("isLoggedIn:", isLoggedIn);
   console.log("isOwn", isOwn);
   console.log("card.owner", card.owner);
-  console.log("currentUser._id", currentUser._id);
+  console.log("currentUser._id", currentUser?._id);
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
