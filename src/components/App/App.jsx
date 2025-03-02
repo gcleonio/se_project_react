@@ -127,8 +127,9 @@ function App() {
     const token = localStorage.getItem("jwt");
     addItem({ name, imageUrl, weather, token })
       .then((res) => {
+        console.log(res);
         setClothingItems((prevItems) => {
-          return [res, ...prevItems];
+          return [res.data, ...prevItems];
         });
         closeActiveModal();
       })
