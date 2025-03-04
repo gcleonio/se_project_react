@@ -33,9 +33,9 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
       title="Log In"
       onClose={onClose}
       isOpen={isOpen}
-      // onSubmit={handleLoginSubmit}
+      onSubmit={handleLoginSubmit}
     >
-      <label htmlFor="login" className="modal__label">
+      <label className="modal__label">
         Email
         <input
           type="email"
@@ -50,7 +50,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
           onChange={handleEmailChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label className="modal__label">
         Password
         <input
           type="password"
@@ -66,11 +66,7 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
         />
       </label>
       <div className="modal__button-div">
-        <button
-          type="submit"
-          className="modal__button-login"
-          onClick={handleLoginSubmit}
-        >
+        <button type="submit" className="modal__button-login">
           Log In
         </button>
         <span className="modal__or-text">or</span>

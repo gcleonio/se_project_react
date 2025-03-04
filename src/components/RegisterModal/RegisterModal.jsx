@@ -50,11 +50,11 @@ const RegisterModal = ({
   return (
     <ModalWithForm
       title="Sign Up"
-      // onSubmit={handleRegistrationSubmit}
+      onSubmit={handleRegistrationSubmit}
       onClose={onClose}
       isOpen={isOpen}
     >
-      <label htmlFor="email" className="modal__label">
+      <label className="modal__label">
         Email *
         <input
           type="email"
@@ -69,7 +69,7 @@ const RegisterModal = ({
           onChange={handleEmailChange}
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label className="modal__label">
         Password *
         <input
           type="password"
@@ -84,7 +84,7 @@ const RegisterModal = ({
           onChange={handlePasswordChange}
         />
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name *
         <input
           type="text"
@@ -99,7 +99,7 @@ const RegisterModal = ({
           onChange={handleNameChange}
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         Avatar URL *
         <input
           type="url"
@@ -113,11 +113,7 @@ const RegisterModal = ({
         />
       </label>
       <div className="modal__button-div">
-        <button
-          type="button"
-          className="modal__button-sign-up"
-          onClick={handleRegistrationSubmit}
-        >
+        <button type="submit" className="modal__button-sign-up">
           Sign Up
         </button>
         <span className="modal__or-text">or</span>

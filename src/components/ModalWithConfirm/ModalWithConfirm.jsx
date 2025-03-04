@@ -6,10 +6,6 @@ function ModalWithConfirm({
   handleDeleteCard,
   buttonText,
 }) {
-  //   const deleteCardConfirmClick = () => {
-  //     handleDeleteCard(card._id);
-  //   };
-
   return (
     <div className={`modal ${activeModal === "confirm" && "modal_opened"}`}>
       <div className="modal__content modal__content-type-confirm">
@@ -24,7 +20,6 @@ function ModalWithConfirm({
             irreversible.
           </h2>
           <button
-            // onClick={deleteCardConfirmClick}
             onClick={handleDeleteCard}
             type="button"
             className="modal__delete-confirm-btn"

@@ -59,7 +59,7 @@ function App() {
             )
           );
         })
-        .catch((err) => console.error(err));
+        .catch(console.error);
     } else {
       // if not, send a request to remove the user's id from the card's likes array
       removeCardLike(item._id, token)
@@ -70,7 +70,7 @@ function App() {
             )
           );
         })
-        .catch((err) => console.error(err));
+        .catch(console.error);
     }
   };
 
@@ -209,14 +209,13 @@ function App() {
       })
       .catch(console.error);
   }, []);
-  // console.log(currentTemperatureUnit);
+
   console.log(weatherData);
 
   useEffect(() => {
     getItems()
       .then((data) => {
         console.log(data);
-        // set the clothing items
         setClothingItems(data);
       })
       .catch(console.error);
@@ -257,7 +256,6 @@ function App() {
                   <Main
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
-                    // pass clothingItems as a prop
                     clothingItems={clothingItems}
                     onCardLike={handleCardLike}
                   />
