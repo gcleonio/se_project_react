@@ -1,5 +1,5 @@
 import { checkRes } from "./api";
-const baseUrl = "http://localhost:3001";
+import { baseUrl } from "./constants";
 
 //  signup for user registration
 const registerUser = (userData) => {
