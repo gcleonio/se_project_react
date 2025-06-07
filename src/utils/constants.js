@@ -113,6 +113,6 @@ export const coordinates = {
 export const APIkey = "41db1683c55d6099e16eecd3d15dd3d5";
 
 export const baseUrl =
-  process.env.NODE_ENV === "production"
+  import.meta.env.MODE === "production"
     ? "https://api.wtwr.rainbowcup.com"
     : "http://localhost:3001";

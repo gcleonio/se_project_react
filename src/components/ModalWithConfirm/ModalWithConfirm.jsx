@@ -1,11 +1,6 @@
 import "./ModalWithConfirm.css";
 
-function ModalWithConfirm({
-  activeModal,
-  onClose,
-  handleDeleteCard,
-  buttonText,
-}) {
+function ModalWithConfirm({ activeModal, onClose, handleDeleteCard }) {
   return (
     <div className={`modal ${activeModal === "confirm" && "modal_opened"}`}>
       <div className="modal__content modal__content-type-confirm">
