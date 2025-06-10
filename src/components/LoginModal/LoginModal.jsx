@@ -1,39 +1,35 @@
 import "./LoginModal.css";
 import { useState, useEffect } from "react";
 import ModalWithForm from "..//ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
-  const handlePasswordChange = (e) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-
-  const handleLoginSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    handleLogin({ email: values.email, password: values.password })
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
   };
 
   useEffect(() => {
     if (isOpen) {
-      setEmail("");
-      setPassword("");
+      resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
   return (
     <ModalWithForm
       title="Log In"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleLoginSubmit}
+      onSubmit={handleSubmit}
     >
       <label className="modal__label">
         Email
@@ -45,10 +41,11 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
           name="email"
           minLength="1"
           maxLength="30"
-          value={email}
+          value={values.email || ""}
           required
-          onChange={handleEmailChange}
+          onChange={handleChange}
         />
+        {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
       <label className="modal__label">
         Password
@@ -60,13 +57,20 @@ const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
           name="password"
           minLength="1"
           maxLength="30"
-          value={password}
+          value={values.password || ""}
           required
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
       </label>
       <div className="modal__button-div">
-        <button type="submit" className="modal__button-login">
+        <button
+          type="submit"
+          className="modal__button-login"
+          disabled={!isValid}
+        >
           Log In
         </button>
         <span className="modal__or-text">or</span>

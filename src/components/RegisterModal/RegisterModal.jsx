@@ -1,6 +1,7 @@
 import "./RegisterModal.css";
 import { useState, useEffect } from "react";
 import ModalWithForm from "..//ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 const RegisterModal = ({
   isOpen,
@@ -8,49 +9,35 @@ const RegisterModal = ({
   onLoginClick,
   onClose,
 }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const { values, handleChange, errors, isValid, setValues, resetForm } =
+    useFormAndValidation();
 
-  const handleNameChange = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-
-  const handleAvatarChange = (e) => {
-    console.log(e.target.value);
-    setAvatar(e.target.value);
-  };
-
-  const handleRegistrationSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration({ name, email, password, avatar });
+    handleRegistration({
+      email: values.email,
+      password: values.password,
+      name: values.name,
+      avatar: values.avatar,
+    })
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        console.error("Registration failed:", err);
+      });
   };
 
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setAvatar("");
-      setEmail("");
-      setPassword("");
+      resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
   return (
     <ModalWithForm
       title="Sign Up"
-      onSubmit={handleRegistrationSubmit}
+      onSubmit={handleSubmit}
       onClose={onClose}
       isOpen={isOpen}
     >
@@ -64,10 +51,11 @@ const RegisterModal = ({
           name="email"
           minLength="1"
           maxLength="30"
-          value={email}
+          value={values.email || ""}
           required
-          onChange={handleEmailChange}
+          onChange={handleChange}
         />
+        {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
       <label className="modal__label">
         Password *
@@ -79,10 +67,13 @@ const RegisterModal = ({
           name="password"
           minLength="1"
           maxLength="30"
-          value={password}
+          value={values.password || ""}
           required
-          onChange={handlePasswordChange}
+          onChange={handleChange}
         />
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
       </label>
       <label className="modal__label">
         Name *
@@ -95,9 +86,10 @@ const RegisterModal = ({
           required
           minLength="1"
           maxLength="30"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name || ""}
+          onChange={handleChange}
         />
+        {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
       <label className="modal__label">
         Avatar URL *
@@ -107,13 +99,18 @@ const RegisterModal = ({
           id="avatar-register"
           placeholder="Avatar URL"
           name="avatar"
-          value={avatar}
+          value={values.avatar || ""}
           required
-          onChange={handleAvatarChange}
+          onChange={handleChange}
         />
+        {errors.avatar && <span className="modal__error">{errors.avatar}</span>}
       </label>
       <div className="modal__button-div">
-        <button type="submit" className="modal__button-sign-up">
+        <button
+          type="submit"
+          className="modal__button-sign-up"
+          disabled={!isValid}
+        >
           Sign Up
         </button>
         <span className="modal__or-text">or</span>

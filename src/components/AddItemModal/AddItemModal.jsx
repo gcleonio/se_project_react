@@ -25,7 +25,6 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     if (isOpen) {
       setName("");
       setImageUrl("");
-      // setWeather("");
     }
   }, [isOpen, setName, setImageUrl, setWeather]);
 
@@ -38,8 +37,6 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     <ModalWithForm
       title="New garment"
       buttonText="Add garment"
-      //   activeModal={activeModal}
-      //   onClose={closeActiveModal}
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}

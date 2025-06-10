@@ -95,7 +95,7 @@ function App() {
     document.addEventListener("keydown", handleEscClose);
 
     return () => {
-      //clean up function for removing the listener if the component unmounts
+      // clean up function for removing the listener if the component unmounts
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]); // dependencies array in order to watch activeModal
@@ -163,9 +163,9 @@ function App() {
 
   const handleLogin = (values) => {
     if (!values) {
-      return;
+      return Promise.reject(new Error("No values provided"));
     }
-    loginUser(values)
+    return loginUser(values)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         return verifyToken(data.token);
@@ -176,17 +176,23 @@ function App() {
         closeActiveModal();
         navigate("/profile");
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        throw err;
+      });
   };
 
   const handleRegistration = (values) => {
-    registerUser(values)
+    return registerUser(values)
       .then((res) => {
         console.log(res);
         closeActiveModal();
-        handleLogin({ email: values.email, password: values.password });
+        return handleLogin({ email: values.email, password: values.password });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        throw err;
+      });
   };
 
   const handleEdit = ({ name, imageUrl }) => {
