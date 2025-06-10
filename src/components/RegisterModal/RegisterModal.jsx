@@ -1,5 +1,5 @@
 import "./RegisterModal.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ModalWithForm from "..//ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
@@ -9,7 +9,7 @@ const RegisterModal = ({
   onLoginClick,
   onClose,
 }) => {
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
   const handleSubmit = (e) => {

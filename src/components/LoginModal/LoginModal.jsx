@@ -1,10 +1,10 @@
 import "./LoginModal.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ModalWithForm from "..//ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 const LoginModal = ({ isOpen, onClose, onSignUpClick, handleLogin }) => {
-  const { values, handleChange, errors, isValid, setValues, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm } =
     useFormAndValidation();
 
   const handleSubmit = (e) => {
